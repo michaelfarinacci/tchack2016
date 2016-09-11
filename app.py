@@ -33,8 +33,15 @@ def index():
 
 @app.route('/checkouts/new', methods=['GET'])
 def new_checkout():
-    client_token = braintree.ClientToken.generate()
     return render_template('checkouts/new.html', client_token=client_token)
+
+@app.route('/customer', methods=['GET'])
+def customer():
+    return render_template('customer.html')
+
+@app.route('/merchant', methods=['GET'])
+def merchant():
+    return render_template('merchant.html')
 
 @app.route('/checkouts/<transaction_id>', methods=['GET'])
 def show_checkout(transaction_id):
