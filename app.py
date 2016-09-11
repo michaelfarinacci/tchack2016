@@ -1,9 +1,11 @@
 from flask import Flask, redirect, url_for, render_template, request, flash
 
+import flask
 import os
 from os.path import join, dirname
 from dotenv import load_dotenv
 import braintree
+import json
 
 app = Flask(__name__)
 dotenv_path = join(dirname(__file__), '.env')
@@ -27,6 +29,8 @@ TRANSACTION_SUCCESS_STATUSES = [
     braintree.Transaction.Status.SubmittedForSettlement
 ]
 
+orders = {'45321': {'total': 100, 'tax': 5}}
+
 @app.route('/', methods=['GET'])
 def index():
     return render_template('first.html')
@@ -36,9 +40,33 @@ def post():
 
 @app.route('/checkouts/new', methods=['GET'])
 def new_checkout():
-    client_token = braintree.ClientToken.generate()
     return render_template('checkouts/new.html', client_token=client_token)
 
+
+@app.route('/create_order', methods=['GET'])
+def create_order():
+    total = flask.request.args['total']
+    items = flask.request.args['items']
+    tax = flask.request.args['tax']
+    merchant_id = flask.request.args['merchantId']
+    order_id = 45321
+    return order_id
+
+@app.route('/get_order', methods=['GET'])
+def get_order():
+    order_id = flask.request.args['orderId']
+    order_data = orders[order_id]
+    json_order_data = json.dumps(order_data)
+    resp = flask.Response(response=json_order_data, status=200, mimetype="application/json")
+    return resp
+
+@app.route('/customer', methods=['GET'])
+def customer():
+    return render_template('customer.html')
+
+@app.route('/merchant', methods=['GET'])
+def merchant():
+    return render_template('merchant.html')
 
 @app.route('/checkouts/<transaction_id>', methods=['GET'])
 def show_checkout(transaction_id):
