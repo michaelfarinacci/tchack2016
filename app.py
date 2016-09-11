@@ -29,12 +29,16 @@ TRANSACTION_SUCCESS_STATUSES = [
 
 @app.route('/', methods=['GET'])
 def index():
-    return redirect(url_for('new_checkout'))
+    return render_template('first.html')
+
+def post():
+    return redirect("second.html")
 
 @app.route('/checkouts/new', methods=['GET'])
 def new_checkout():
     client_token = braintree.ClientToken.generate()
     return render_template('checkouts/new.html', client_token=client_token)
+
 
 @app.route('/checkouts/<transaction_id>', methods=['GET'])
 def show_checkout(transaction_id):

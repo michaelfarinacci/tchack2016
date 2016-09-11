@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div>
+    <div class="pull-left">
+        <button class="btn btn-default" type="submit">< Leave Bill</button>
+    </div>
+</div>
+<table class="table table-striped">
+            <tr>
+                <td>
+                    Subtotal
+                </td>
+                <td>
+                    <p class="text-right">$10.00</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Tip
+                </td>
+                <td>
+                    <p class="text-right">$10.00</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Tax
+                </td>
+                <td>
+                    <p class="text-right">$20.00</p>
+                </td>
+            </tr>
+            <hr>
+            <tr>
+                <td>
+                    Grand Total
+                </td>
+                <td>
+                    <p class="text-right">$60.00</p>
+                </td>
+            </tr>
+</table>
+<form>
+    <div class="form-group">
+        <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Amount">
+    </div>
+        <input type="submit" class="btn btn-default">
+</form>
+{% endblock %}

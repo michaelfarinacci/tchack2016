@@ -998,9 +998,6 @@ footer {
   width: 100%; }
 
 header.main {
-  position: fixed;
-  left: 0px;
-  top: 0px;
   width: 100%;
   z-index: 20;
   background-color: #fff;
